@@ -519,15 +519,17 @@
 Après création du compte admin, créer la partition disque.</p>
 <p>Décocher le Destktop Environment et rester en Headless puis activer le SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.</p>
 <p><img alt="Image" src="assets/20260118162825.png" /></p>
-<p>L'os démarre après l'utilitaire d'installation.</p>
-<p><img alt="Image" src="assets/20260118163125.png" />
+<p>L'os démarre après l'utilitaire d'installation.
 Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.</p>
 <p><img alt="Image" src="assets/20260118163159.png" />
-SSH fonctionnel, prouvé par la possibilité de s'y connecter depuis un autre PC.</p>
-<p><img alt="Image" src="assets/20260118163658.png" />
-Installer sudo via su- puis ajouter l'utilisateur au groupe sudo. Nécessaire pour l'installation des paquets.
-Ensuite se référer à la documentation officielle de GLPI ici :
-https://glpi-install.readthedocs.io/en/latest/prerequisites.html et https://glpi-install.readthedocs.io/en/latest/install/index.html</p>
+<img alt="Image" src="assets/20260118163658.png" /></p>
+<p>SSH fonctionnel, prouvé par la possibilité de s'y connecter depuis un autre PC.</p>
+<p>Installer sudo via su- puis ajouter l'utilisateur au groupe sudo. Nécessaire pour l'installation des paquets.
+Ensuite se référer à la documentation officielle de GLPI ici :</p>
+<ul>
+<li>https://glpi-install.readthedocs.io/en/latest/prerequisites.html</li>
+<li>https://glpi-install.readthedocs.io/en/latest/install/index.html</li>
+</ul>
 <p>Tout d'abord, installer les paquets  nécessaires conformément au paragraphe "prerequisites" et "web server" de la documentation :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2<span class="w"> </span>mariadb-server<span class="w"> </span>php<span class="w"> </span>php-mysql<span class="w"> </span>php-ldap<span class="w"> </span>php-xml<span class="w"> </span>php-gd<span class="w"> </span>php-mbstring<span class="w"> </span>php-curl<span class="w"> </span>php-intl<span class="w"> </span>php-zip<span class="w"> </span>php-bz2
 </span></code></pre></div></td></tr></table></div></p>
@@ -550,10 +552,25 @@ https://glpi-install.readthedocs.io/en/latest/prerequisites.html et https://glpi
 <p>En cas de doute, utiliser "man tar" pour identifier la bonne commande d'extraction puis :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>tar<span class="w"> </span>-xvzf<span class="w"> </span>glpi-10.0.12.tgz<span class="w"> </span>
 </span></code></pre></div></td></tr></table></div></p>
-<p>Résumé de la structure :
-|Instance|Configuration|Data|Logs|
-|--------|-------------|----|----|
-|/var/www/glpi|/etc/glpi|/var/lib/glpi/files|/var/logs/glpi|</p>
+<p>Résumé de la structure :</p>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>Configuration</th>
+<th>Data</th>
+<th>Logs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/var/www/glpi</td>
+<td>/etc/glpi</td>
+<td>/var/lib/glpi/files</td>
+<td>/var/logs/glpi</td>
+</tr>
+</tbody>
+</table>
 <p>Déplacer le fichier : 
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>glpi<span class="w"> </span>/var/www/glpi
 </span></code></pre></div></td></tr></table></div></p>
