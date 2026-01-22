@@ -475,10 +475,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation-des-dependencies" class="md-nav__link">
+  <a href="#installation-des-dependances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation des dependencies
+        Installation des dépendances
       
     </span>
   </a>
@@ -631,10 +631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation-des-dependencies" class="md-nav__link">
+  <a href="#installation-des-dependances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation des dependencies
+        Installation des dépendances
       
     </span>
   </a>
@@ -772,7 +772,7 @@ Ensuite se référer à la documentation officielle de GLPI ici :</p>
 <li>https://glpi-install.readthedocs.io/en/latest/prerequisites.html</li>
 <li>https://glpi-install.readthedocs.io/en/latest/install/index.html</li>
 </ul>
-<h3 id="installation-des-dependencies">Installation des dependencies<a class="headerlink" href="#installation-des-dependencies" title="Permanent link">&para;</a></h3>
+<h3 id="installation-des-dependances">Installation des dépendances<a class="headerlink" href="#installation-des-dependances" title="Permanent link">&para;</a></h3>
 <p>Tout d'abord, installer les paquets  nécessaires conformément au paragraphe "prerequisites" et "web server" de la documentation :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2<span class="w"> </span>mariadb-server<span class="w"> </span>php<span class="w"> </span>php-mysql<span class="w"> </span>php-ldap<span class="w"> </span>php-xml<span class="w"> </span>php-gd<span class="w"> </span>php-mbstring<span class="w"> </span>php-curl<span class="w"> </span>php-intl<span class="w"> </span>php-zip<span class="w"> </span>php-bz2
 </span></code></pre></div></td></tr></table></div></p>
@@ -819,7 +819,7 @@ Ensuite se référer à la documentation officielle de GLPI ici :</p>
 <p>Déplacer le fichier : 
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>glpi<span class="w"> </span>/var/www/glpi
 </span></code></pre></div></td></tr></table></div></p>
-<p>Donner les permissions récursives:
+<p>Donner les permissions récursives :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/glpi<span class="w"> </span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>/var/www/glpi
@@ -859,17 +859,17 @@ http://192.168.1.12/glpi/install/install.php
 Choisir "Installer"
 L'utilitaire signale plusieurs problèmes à corriger :
 <img alt="Image" src="assets/20260118165549.png" />
-Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix est considéré compatible avec le bon fonctionnement de GLPI dans ce contexte.</p>
-<p>Remplir ensuite le formulaire de connexion avec les infos placées dans la commande mariadb plus tôt.
+Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix ne nuit pas au bon fonctionnement de GLPI dans ce contexte.</p>
+<p>Remplir ensuite le formulaire de connexion avec les identifiants créés dans la commande mariadb plus tôt.
 <img alt="Image" src="assets/20260118180550.png" />
 Connexion établie.</p>
 <p><img alt="Image" src="assets/20260118180628.png" />
 On sélectionne la base de données existante : glpi</p>
-<p>Tester la connexion avec le compte admin:
+<p>Tester la connexion avec le compte admin :
 <img alt="Image" src="assets/20260118180853.png" />
 Réussi, on a bien tous les comptes créés par défaut :
 <img alt="Image" src="assets/20260118180949.png" />
-A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.</p>
+Créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.</p>
 <h3 id="mise-a-jour-de-glpi">Mise à jour de GLPI<a class="headerlink" href="#mise-a-jour-de-glpi" title="Permanent link">&para;</a></h3>
 <div class="admonition danger">
 <p class="admonition-title">Important : réaliser une sauvegarde de la base de données.</p>
@@ -879,7 +879,7 @@ A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer
 <span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a>wget<span class="w"> </span>https://github.com/glpi-project/glpi/releases/download/x.x.x/glpi-x.x.x.tgz
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>tar<span class="w"> </span>-xvzf<span class="w"> </span>glpi-x.x.x.tgz
 </span></code></pre></div></td></tr></table></div>
-Supprimer les data applicatifs de l'ancienne version :
+Supprimer les data applicatif de l'ancienne version :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/www/glpi/*<span class="w"> </span>
