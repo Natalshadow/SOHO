@@ -499,66 +499,79 @@
 <p>20260119</p>
 <h3 id="brief-part-4">Brief part 4<a class="headerlink" href="#brief-part-4" title="Permanent link">&para;</a></h3>
 <p>Créer une VM en Debian 11.6.
-<img alt="ServerSelectionSetup.png" src="assets/ServerSelectionSetup.png" /></p>
-<p><img alt="20260118161746.png" src="assets/20260118161746.png" />
-!<img alt="" src="assets/20260118161806.png" /></p>
-<p>!<img alt="" src="assets/20260118161838.png" />
-Définition du nom sur srv-glpi et du domaine sur rue25.com.
-!<img alt="" src="assets/20260118162259.png" />
-Après création du compte admin, création de la partition.
-!<img alt="" src="assets/20260118162337.png" />
-On décoche la DE pour partir en Headless et on active SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.
-!<img alt="" src="assets/20260118162825.png" />
-L'os démarre après l'utilitaire d'installation :
-!<img alt="" src="assets/20260118163125.png" />
-Je vérifie si ssh tourne tout de suite pour pouvoir continuer depuis mon propre terminal:
-!<img alt="" src="assets/20260118163159.png" />
-SSH fonctionnel, prouvé par la possibilité de m'y connecter depuis mon PC.
-!<img alt="" src="assets/20260118163658.png" />
-Installation de sudo via su- puis ajoute de l'utilisateur au sudoer
-Ensuite je vais chercher la doc de GLPI ici :
+<img alt="ServerSelectionSetup.png" src="/assets/ServerSelectionSetup.png" /></p>
+<p><img alt="Pasted image 20260118161746.png" src="/asset/20260118161746.png" />
+![[Pasted image 20260118161806.png]]</p>
+<p>![[Pasted image 20260118161838.png]]
+Définir le nom sur srv-glpi et du domaine sur rue25.com.</p>
+<p>![[Pasted image 20260118162259.png]]
+Après création du compte admin, créer la partition disque.</p>
+<p>![[Pasted image 20260118162337.png]]
+On décoche la DE pour partir en Headless et on active SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.</p>
+<p>![[Pasted image 20260118162825.png]]
+L'os démarre après l'utilitaire d'installation.</p>
+<p>![[Pasted image 20260118163125.png]]
+Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.</p>
+<p>![[Pasted image 20260118163159.png]]
+SSH fonctionnel, prouvé par la possibilité de s'y connecter depuis un autre PC.</p>
+<p>![[Pasted image 20260118163658.png]]
+Installer sudo via su- puis ajouter l'utilisateur au groupe sudo. Nécessaire pour l'installation des paquets.
+Ensuite se référer à la documentation officielle de GLPI ici :
 https://glpi-install.readthedocs.io/en/latest/prerequisites.html et https://glpi-install.readthedocs.io/en/latest/install/index.html</p>
-<p>Commeçons par l'installation des packets dependencies du brief:
-sudo apt install apache2 mariadb-server php php-mysql php-ldap php-xml php-gd php-mbstring php-curl php-intl php-zip php-bz2 -y</p>
-<p>Sudo mariadb
-CREATE DATABASE glpi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'glpi_admin'@'localhost' IDENTIFIED BY 'unmotdepassetresfort';
-GRANT ALL PRIVILEGES ON glpi.* TO 'glpi_admin'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;</p>
+<p>Tout d'abord, installer les paquets  nécessaires :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2<span class="w"> </span>mariadb-server<span class="w"> </span>php<span class="w"> </span>php-mysql<span class="w"> </span>php-ldap<span class="w"> </span>php-xml<span class="w"> </span>php-gd<span class="w"> </span>php-mbstring<span class="w"> </span>php-curl<span class="w"> </span>php-intl<span class="w"> </span>php-zip<span class="w"> </span>php-bz2
+</span></code></pre></div></td></tr></table></div></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>sudo<span class="w"> </span>mariadb
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a>CREATE<span class="w"> </span>DATABASE<span class="w"> </span>glpi<span class="w"> </span>CHARACTER<span class="w"> </span>SET<span class="w"> </span>utf8mb4<span class="w"> </span>COLLATE<span class="w"> </span>utf8mb4_unicode_ci<span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>CREATE<span class="w"> </span>USER<span class="w"> </span><span class="s1">&#39;glpi_admin&#39;</span>@<span class="s1">&#39;localhost&#39;</span><span class="w"> </span>IDENTIFIED<span class="w"> </span>BY<span class="w"> </span><span class="s1">&#39;unmotdepassetresfort&#39;</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>glpi.*<span class="w"> </span>TO<span class="w"> </span><span class="s1">&#39;glpi_admin&#39;</span>@<span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>FLUSH<span class="w"> </span>PRIVILEGES<span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a>EXIT<span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
 <p>On créér la base de données avec une utilisateur dédié pour être rootless.
-Ensuite téléchargement de l'archive avec wget  https://github.com/glpi-project/glpi/releases/download/10.0.12/glpi-10.0.12.tgz </p>
+Ensuite téléchargement de l'archive avec 
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>```bash wget  https://github.com/glpi-project/glpi/releases/download/10.0.12/glpi-10.0.12.tgz `
+</span></code></pre></div></td></tr></table></div></p>
 <p>Petit détour par man tar pour identifier la bonne commande d'extraction puis
-tar -xvzf glpi-10.0.12.tgz </p>
-<p>Déplacement du fichier : sudo mv glpi /var/www/glpi
- On donne les permissions récursives:
- sudo chown -R www-data:www-data /var/www/glpi sudo chmod -R 755 /var/www/glpi</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="sb">```</span>tar<span class="w"> </span>-xvzf<span class="w"> </span>glpi-10.0.12.tgz<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Déplacement du fichier : 
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="sb">```</span>sudo<span class="w"> </span>mv<span class="w"> </span>glpi<span class="w"> </span>/var/www/glpi
+</span></code></pre></div></td></tr></table></div>
+On donne les permissions récursives:
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="sb">```</span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/glpi<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>/var/www/glpi
+</span></code></pre></div></td></tr></table></div></p>
 <p>Création du fichier downstream
-!<img alt="" src="assets/20260118170700.png" />
+![[Pasted image 20260118170700.png]]
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/config /etc/glpi/
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
 admintest@srv-glpi:/tmp$ sudo nano /var/www/glpi/inc/downstream.php</p>
 <p>Dorénavant l'interface web est accessible à l'adresse 
 http://192.168.1.12/glpi/install/install.php
-!<img alt="" src="assets/20260118165219.png" /></p>
+![[Pasted image 20260118165219.png]]</p>
 <p>On accepte les ToS.
 On choisit "Installer"
 L'utilitaire signale plusieurs problèmes à corriger, ce qu'on va faire :
-!<img alt="" src="assets/20260118165549.png" />
+![[Pasted image 20260118165549.png]]
 Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix est considéré compatible avec le bon fonctionnement de GLPI dans ce contexte.</p>
 <p>On remplit ensuite le formulaire de connexion avec les infos qu'on a placé dans la commande plus tôt
-!<img alt="" src="assets/20260118180550.png" />La connexion a réussi
-!<img alt="" src="assets/20260118180628.png" />
+![[Pasted image 20260118180550.png]]La connexion a réussi
+![[Pasted image 20260118180628.png]]
 On sélectionne la db qu'on a déjà créé, glpi
 Formulaire concernant la récolte des données
-!<img alt="" src="assets/20260118180808.png" /></p>
+![[Pasted image 20260118180808.png]]</p>
 <p>Test de connexion avec le compte admin:
-!<img alt="" src="assets/20260118180853.png" />
+![[Pasted image 20260118180853.png]]
 Réussi, on a bien tous les comptés créés par défaut :
-!<img alt="" src="assets/20260118180949.png" />
+![[Pasted image 20260118180949.png]]
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.</p>
 <p>Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinnente. Le docker-compose.yaml ressemblerait à :</p>
-<p>!<img alt="" src="assets/20260118182627.png" />
+<p>![[Pasted image 20260118182627.png]]
 Source :
 https://help.glpi-project.org/tutorials/fr/procedures/running_glpi_on_docker
 Il suffirait alors de créer le fichier .env, adapter les bind mounts et ajouter un service pour un reverse proxy (nginx par exemple) ou ajouter un tunnel Cloudflared pour bénéficier des protections de Cloudflared.</p>
