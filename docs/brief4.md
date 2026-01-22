@@ -41,7 +41,7 @@ Ensuite se référer à la documentation officielle de GLPI ici :
 - https://glpi-install.readthedocs.io/en/latest/install/index.html
 
 
-### Installation des dependencies
+### Installation des dépendances
 Tout d'abord, installer les paquets  nécessaires conformément au paragraphe "prerequisites" et "web server" de la documentation :
 ```bash
 sudo apt install apache2 mariadb-server php php-mysql php-ldap php-xml php-gd php-mbstring php-curl php-intl php-zip php-bz2
@@ -80,7 +80,7 @@ Déplacer le fichier :
 sudo mv glpi /var/www/glpi
 ```
 
-Donner les permissions récursives:
+Donner les permissions récursives :
 ```bash
 sudo chown -R www-data:www-data /var/www/glpi 
 sudo chmod -R 755 /var/www/glpi
@@ -121,9 +121,9 @@ Accepter les ToS.
 Choisir "Installer"
 L'utilitaire signale plusieurs problèmes à corriger :
 ![Image](assets/20260118165549.png)
-Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix est considéré compatible avec le bon fonctionnement de GLPI dans ce contexte.
+Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix ne nuit pas au bon fonctionnement de GLPI dans ce contexte.
 
-Remplir ensuite le formulaire de connexion avec les infos placées dans la commande mariadb plus tôt.
+Remplir ensuite le formulaire de connexion avec les identifiants créés dans la commande mariadb plus tôt.
 ![Image](assets/20260118180550.png)
 Connexion établie.
 
@@ -131,19 +131,22 @@ Connexion établie.
 On sélectionne la base de données existante : glpi
 
 
-Tester la connexion avec le compte admin:
+Tester la connexion avec le compte admin :
 ![Image](assets/20260118180853.png)
 Réussi, on a bien tous les comptes créés par défaut :
 ![Image](assets/20260118180949.png)
-A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.
+Créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.
+
+
 ### Mise à jour de GLPI
+
 !!! danger "Important : réaliser une sauvegarde de la base de données."
 Télécharger la version à jour ou la version souhaitée via github ou wget.
 ```bash
 wget https://github.com/glpi-project/glpi/releases/download/x.x.x/glpi-x.x.x.tgz
 tar -xvzf glpi-x.x.x.tgz
 ```
-Supprimer les data applicatifs de l'ancienne version :
+Supprimer les data applicatif de l'ancienne version :
 ```bash
 sudo rm -rf /var/www/glpi/* 
 sudo cp -r glpi/* /var/www/glpi/
