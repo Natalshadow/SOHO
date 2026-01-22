@@ -25,6 +25,7 @@ Décocher le Destktop Environment et rester en Headless puis activer le SSH conf
 
 
 L'os démarre après l'utilitaire d'installation.
+L'adresse IP attribuée est le 192.168.1.12.
 Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.
 
 
@@ -72,7 +73,7 @@ Résumé de la structure :
 
 |Instance|Configuration|Data|Logs|
 |--------|-------------|----|----|
-|/var/www/glpi|/etc/glpi|/var/lib/glpi/files|/var/logs/glpi|
+|/var/www/glpi|/etc/glpi|/var/lib/glpi/files|/var/log/glpi|
 
 Déplacer le fichier : 
 ```bash
@@ -81,17 +82,16 @@ sudo mv glpi /var/www/glpi
 
 Donner les permissions récursives:
 ```bash
-sudo chown -R www-data:www-data /var/www/glpi sudo chmod -R 755 /var/www/glpi
+sudo chown -R www-data:www-data /var/www/glpi 
+sudo chmod -R 755 /var/www/glpi
 ```
 
 
-
-![Image](assets/20260118170700.png)
 Ranger les fichiers aux emplacements indiqués dans le tableau ci-dessus :
 ```bash
-admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/config /etc/glpi/
-admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
-admintest@srv-glpi:/tmp$ sudo nano /var/www/glpi/inc/downstream.php
+sudo cp -rp /var/www/glpi/config /etc/glpi/
+sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
+sudo nano /var/www/glpi/inc/downstream.php
 ```
 Créer unfichier downstream.php qui contient :
 ```php
