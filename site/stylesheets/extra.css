@@ -1124,3 +1124,8 @@
 .highlight .kd {
   font-weight: 600;
 }
+
+img {
+    display: block;
+    margin: 0 auto 1em auto; /* Centre l'image et ajoute de l'espace en dessous */
+}

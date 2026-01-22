@@ -7,41 +7,46 @@
 ### Brief part 4
 
 Créer une VM en Debian 11.6. 
-|CPU|RAM|Stockage|
-----|---|---------
-|1|2 Go|20 Go|
 
-Définir le nom sur srv-glpi et du domaine sur rue25.com.
+| CPU | RAM | Stockage |
+|-----|-----|----------|
+|  1  | 2 Go|  20 Go   |
 
-![Image](assets/20260118162259.png)
+
+
+
+
+Définir le nom sur srv-glpi et le domaine sur rue25.com.
 Après création du compte admin, créer la partition disque.
 
-![Image](assets/20260118162337.png)
-On décoche la DE pour partir en Headless et on active SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.
+Décocher le Destktop Environment et rester en Headless puis activer le SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.
 
 ![Image](assets/20260118162825.png)
-L'os démarre après l'utilitaire d'installation.
 
-![Image](assets/20260118163125.png)
+
+L'os démarre après l'utilitaire d'installation.
 Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.
 
 
 ![Image](assets/20260118163159.png)
+![Image](assets/20260118163658.png)
+
 SSH fonctionnel, prouvé par la possibilité de s'y connecter depuis un autre PC.
 
-![Image](assets/20260118163658.png)
 Installer sudo via su- puis ajouter l'utilisateur au groupe sudo. Nécessaire pour l'installation des paquets.
 Ensuite se référer à la documentation officielle de GLPI ici :
-https://glpi-install.readthedocs.io/en/latest/prerequisites.html et https://glpi-install.readthedocs.io/en/latest/install/index.html
+
+- https://glpi-install.readthedocs.io/en/latest/prerequisites.html
+- https://glpi-install.readthedocs.io/en/latest/install/index.html
 
 
 
-Tout d'abord, installer les paquets  nécessaires :
+Tout d'abord, installer les paquets  nécessaires conformément au paragraphe "prerequisites" et "web server" de la documentation :
 ```bash
 sudo apt install apache2 mariadb-server php php-mysql php-ldap php-xml php-gd php-mbstring php-curl php-intl php-zip php-bz2
 ```
 
-
+Initialiser la base de données avec le compte administrateur dédié pour éviter l'accès root.
 ```bash
 sudo mariadb
 CREATE DATABASE glpi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -51,55 +56,79 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-On créér la base de données avec une utilisateur dédié pour être rootless.
-Ensuite téléchargement de l'archive avec 
+
+Ensuite, télécharger l'archive GLPI avec :
 
 ```bash
 wget  https://github.com/glpi-project/glpi/releases/download/10.0.12/glpi-10.0.12.tgz
 ```
 
-Petit détour par man tar pour identifier la bonne commande d'extraction puis
+En cas de doute, utiliser "man tar" pour identifier la bonne commande d'extraction puis :
 ```bash
 tar -xvzf glpi-10.0.12.tgz 
 ```
 
+Résumé de la structure :
 
-Déplacement du fichier : 
+|Instance|Configuration|Data|Logs|
+|--------|-------------|----|----|
+|/var/www/glpi|/etc/glpi|/var/lib/glpi/files|/var/logs/glpi|
+
+Déplacer le fichier : 
 ```bash
 sudo mv glpi /var/www/glpi
 ```
 
-On donne les permissions récursives:
+Donner les permissions récursives:
 ```bash
 sudo chown -R www-data:www-data /var/www/glpi sudo chmod -R 755 /var/www/glpi
 ```
 
-Création du fichier downstream
+
+
 ![Image](assets/20260118170700.png)
+Ranger les fichiers aux emplacements indiqués dans le tableau ci-dessus :
+```bash
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/config /etc/glpi/
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
 admintest@srv-glpi:/tmp$ sudo nano /var/www/glpi/inc/downstream.php
+```
+Créer unfichier downstream.php qui contient :
+```php
+<?php
+define('GLPI_CONFIG_DIR', '/etc/glpi/');
 
-Dorénavant l'interface web est accessible à l'adresse 
+if (file_exists(GLPI_CONFIG_DIR . '/local_define.php')) {
+   require_once GLPI_CONFIG_DIR . '/local_define.php';
+}
+```
+
+Puis créer le fichier /etc/glpi/local_define.php qui contient :
+```php
+<?php
+define('GLPI_VAR_DIR', '/var/lib/glpi/files');
+define('GLPI_LOG_DIR', '/var/log/glpi');
+```
+Dorénavant l'interface web est accessible à l'adresse :
 http://192.168.1.12/glpi/install/install.php
 ![Image](assets/20260118165219.png)
 
 
-On accepte les ToS.
-On choisit "Installer"
-L'utilitaire signale plusieurs problèmes à corriger, ce qu'on va faire :
+Accepter les ToS.
+Choisir "Installer"
+L'utilitaire signale plusieurs problèmes à corriger :
 ![Image](assets/20260118165549.png)
 Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix est considéré compatible avec le bon fonctionnement de GLPI dans ce contexte.
 
-On remplit ensuite le formulaire de connexion avec les infos qu'on a placé dans la commande plus tôt
-![Image](assets/20260118180550.png)La connexion a réussi
+Remplir ensuite le formulaire de connexion avec les infos placées dans la commande mariadb plus tôt.
+![Image](assets/20260118180550.png)
+Connexion établie.
+
 ![Image](assets/20260118180628.png)
-On sélectionne la db qu'on a déjà créé, glpi
-Formulaire concernant la récolte des données
-![Image](assets/20260118180808.png)
+On sélectionne la base de données existante : glpi
 
 
-Test de connexion avec le compte admin:
+Tester la connexion avec le compte admin:
 ![Image](assets/20260118180853.png)
 Réussi, on a bien tous les comptés créés par défaut :
 ![Image](assets/20260118180949.png)
