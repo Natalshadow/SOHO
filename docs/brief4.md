@@ -1,12 +1,10 @@
-# Brief partie 4
-
-
-
 # Simplon - WildCodeSchool - Test positionnement
-20260119
-### Brief part 4
 
-Créer une VM en Debian 11.6. 
+## Brief part 4 - Installation GLPI sur Debian 11.6
+
+### Préparation et installation du système
+
+Créer une VM en Debian 11.6 pour y installer GLPI. 
 
 | CPU | RAM | Stockage |
 |-----|-----|----------|
@@ -26,6 +24,8 @@ Décocher le Destktop Environment et rester en Headless puis activer le SSH conf
 
 L'os démarre après l'utilitaire d'installation.
 L'adresse IP attribuée est le 192.168.1.12.
+
+### Configuration initiale système
 Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.
 
 
@@ -41,12 +41,12 @@ Ensuite se référer à la documentation officielle de GLPI ici :
 - https://glpi-install.readthedocs.io/en/latest/install/index.html
 
 
-
+### Installation des dependencies
 Tout d'abord, installer les paquets  nécessaires conformément au paragraphe "prerequisites" et "web server" de la documentation :
 ```bash
 sudo apt install apache2 mariadb-server php php-mysql php-ldap php-xml php-gd php-mbstring php-curl php-intl php-zip php-bz2
 ```
-
+### Configuration database
 Initialiser la base de données avec le compte administrateur dédié pour éviter l'accès root.
 ```bash
 sudo mariadb
@@ -57,7 +57,7 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-
+### Installation GLPI 
 Ensuite, télécharger l'archive GLPI avec :
 
 ```bash
@@ -109,6 +109,8 @@ Puis créer le fichier /etc/glpi/local_define.php qui contient :
 define('GLPI_VAR_DIR', '/var/lib/glpi/files');
 define('GLPI_LOG_DIR', '/var/log/glpi');
 ```
+
+### Paramétrage GUI de GLPI
 Dorénavant l'interface web est accessible à l'adresse :
 http://192.168.1.12/glpi/install/install.php
 ![Image](assets/20260118165219.png)
@@ -133,6 +135,8 @@ Tester la connexion avec le compte admin:
 Réussi, on a bien tous les comptés créés par défaut :
 ![Image](assets/20260118180949.png)
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.
+
+### Pour aller plus loin
 
 Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinnente. Le docker-compose.yaml ressemblerait à :
 

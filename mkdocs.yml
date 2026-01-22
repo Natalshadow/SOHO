@@ -59,7 +59,6 @@ nav:
   - Home: index.md
   - Brief 3: brief3.md
   - Brief 4: brief4.md
-  - Configuration Guide: configuration.md
 
 # Extra CSS for Catppuccin themes
 extra_css:
