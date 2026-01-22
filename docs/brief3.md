@@ -39,10 +39,6 @@ graph TD
     OU_IMM --- G_IMM
     OU_CPTA --- G_CPTA
 
-    %% Exemple d'utilisateurs (facultatif pour la lisibilité)
-    G_DIR -.-> Samira[Samira BIEN]
-    G_CPTA -.-> Vincent[Vincent TYME]
-
     %% Style pour différencier les types d'objets
     style Domaine fill:#f96,stroke:#333,stroke-width:2px
     style G_DIR fill:#dfd,stroke:#333
@@ -54,11 +50,11 @@ graph TD
 ![Résumé VM](/assets/vm-summary.png)
 
 Préparer une machine virtuelle avec Virtual Box. Configuration des  ressources virtuelles.
-4096 MB de RAM et 2 CPU Cores avec 50Gb d'espace disque. Devrait suffire largement sans priver l'OS principal de ressources.
+4096 MB de RAM et 2 CPU Cores avec 50 Go d'espace disque. Devrait suffire largement sans priver l'OS principal de ressources.
 
 
 La première tentative de boot de l'OS échoue avec une erreur de contrat de licence invalide. 
-Résolution: Ouvrir les paramètres de la VM, puis onglet "Système" et confirmer que la configuration des ressources a bien été enregistrée.
+Résolution : Ouvrir les paramètres de la VM, puis onglet "Système" et confirmer que la configuration des ressources a bien été enregistrée.
 Puis onglet "Stockage", supprimer le "unattended setup" avec l'icône de disquette et relancer.
 
 ![ServerSelectionSetup.png](/assets/ServerSelectionSetup.png)
@@ -138,7 +134,7 @@ Saisir l'adresse IP du routeur : 192.168.1.1 dans ce contexte.
 
 
 ![NomDomaine_et_DNS](assets/20260118142418.png)
-Vérifier que le nom de domaine s'est bien propagé et qu'on retrouve l'ip du serveur.
+Vérifier que le nom de domaine s'est bien propagé et qu'on retrouve l'IP du serveur.
 
 Laisser la page de configuration Server WINS vide.
 Activer l'étendue qu'on vient de configurer.
@@ -156,7 +152,7 @@ Profil 1
 ![NouvelObjetUtilisateur](assets/20260118143521.png)
 ![NouvelObjetUtilisateur_password](assets/20260118143621.png)
 Définir un mot de passe.
-Le changement de mot de passe à la prochaine ouverture a volontairement été décoché et la non expiration du mot de passe a été coché dans le cadre de l'exercice.
+Le changement de mot de passe à la prochaine ouverture a volontairement été décoché et la non-expiration du mot de passe a été cochée dans le cadre de l'exercice.
 Dans un contexte de production, un changement de mot de passe à la première ouverture de session serait recommandé afin d’améliorer la sécurité.
 
 
@@ -171,7 +167,7 @@ D’autres conventions de nommage peuvent être mises en place afin de limiter l
 Dans des environnements de plus grande taille, une modification globale de la nomenclature peut s’avérer complexe à mettre en œuvre une fois la production démarrée.
 
 
-Ajouter les utilisateurs à leurs groupes de sécurité respectifs:
+Ajouter les utilisateurs à leurs groupes de sécurité respectifs :
 ![UtilisateursDansGroupes](assets/20260118153424.png)
 
 Une fois terminé, vérifier que les utilisateurs appartiennent bien à leur groupe.
@@ -183,7 +179,7 @@ Créer une arborescence dédiée aux dossiers partagés par service.
 ![DirectoriesCreation](assets/20260118153756.png)
 
 ### Configuration du partage par groupe
-Retirer "Tout le monde" des propriété du partage. Ajouter le(s) groupe(s) correspondant(s).
+Retirer "Tout le monde" des propriétés du partage. Ajouter le(s) groupe(s) correspondant(s).
 ![Sharegroupmanagement](assets/20260118153939.png)
 
 Reproduire la même procédure dans l'onglet sécurité. Désactiver l'héritage pour définir les droits d'accès et de lecture par groupe.
@@ -191,7 +187,7 @@ Reproduire la même procédure dans l'onglet sécurité. Désactiver l'héritage
 Supprimer la ligne "Utilisateurs" ou lui retirer l'intégralité de ses droits pour ne pas avoir de fuite d'accès.
 ![DeleteUsers](assets/20260118154719.png)
 
-Le dossier partagé comptabilité est donc accessible en lecture/écriture pour le groupe G_COMPTABLES, lisible par le groupe G_DIRECTION, et inaccessible pour les autres. On protégère ainsi les fichiers d'une mauvaise écriture par un service non concerné et on empêche la lecture de documents sensibles par des personnes non concernées. Application du principe de Least Privilege. 
+Le dossier partagé comptabilité est donc accessible en lecture/écriture pour le groupe G_COMPTABLES, lisible par le groupe G_DIRECTION, et inaccessible pour les autres. On protégè ainsi les fichiers d'une mauvaise écriture par un service non concerné et on empêche la lecture de documents sensibles par des personnes non concernées. Application du principe de Least Privilege. 
 
 Reproduire la même procédure pour les autres dossiers partagés.
 
