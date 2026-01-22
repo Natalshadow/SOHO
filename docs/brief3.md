@@ -47,9 +47,11 @@ graph TD
     style G_CPTA fill:#dfd,stroke:#333
 </div>
 ## Préparation de l'environnement 
-![Résumé VM](/assets/vm-summary.png)
+![Résumé VM](assets/vm-summary.png)
+![Server Selection](assets/ServerSelectionSetup.png)
 
-Préparer une machine virtuelle avec Virtual Box. Configuration des  ressources virtuelles.
+Préparer une machine virtuelle avec Virtual Box. Configuration des ressources virtuelles.
+![Virtual Resources](assets/vm-virtual-resources.png)
 4096 MB de RAM et 2 CPU Cores avec 50 Go d'espace disque. Devrait suffire largement sans priver l'OS principal de ressources.
 
 
@@ -57,27 +59,27 @@ La première tentative de boot de l'OS échoue avec une erreur de contrat de lic
 Résolution : Ouvrir les paramètres de la VM, puis onglet "Système" et confirmer que la configuration des ressources a bien été enregistrée.
 Puis onglet "Stockage", supprimer le "unattended setup" avec l'icône de disquette et relancer.
 
-![ServerSelectionSetup.png](/assets/ServerSelectionSetup.png)
+![ServerSelectionSetup.png](assets/ServerSelectionSetup.png)
 
 
 Sélectionner le type de serveur à installer. Choisir l'environnement desktop.
 
 
-![Configuration administrateur](/assets/AdminConfig.png)
+![Configuration administrateur](assets/AdminConfig.png)
 
 Pour la gestion des accès, configuration d'un mot de passe complexe pour le compte Administrateur. Dans une infrastructure plus large, on pourrait centraliser la gestion des identités avec une solution comme Authentik ou des solutions professionnelles comme CyberArk pour sécuriser les comptes à hauts privilèges.
 
 
 Au démarrage de l'OS, autoriser la découverte réseau.
 
-![Snapshop VM](/assets/Snapshot1.png)
+![Snapshop VM](assets/Snapshot1.png)
 
 Réalisation d'une première snapshot post-installation avec une base d'OS fonctionnel  sans aucune autre action importante réalisée. Permet de revenir à un état propre en cas de problème ou de dupliquer l'OS pour une autre utilité ou configuration tout en garantissant l'homogénéité de la configuration appliquée.
 
 ### Début de la configuration du serveur
 Renommer le serveur en SRV-AD-RUE25
 
-![ConfigIPServ.png](/assets/ConfigIPServ.png)
+![ConfigIPServ.png](assets/ConfigIPServ.png)
 Configuration du panel IPv4, définition de l'IP, masque, passerelle et DNS par défaut. Définir une IP fixe permet de garantir la pérennité de l'accès au serveur.
 
 | IP | Passerelle | DNS |
@@ -91,29 +93,29 @@ Configuration du panel IPv4, définition de l'IP, masque, passerelle et DNS par 
 Ajouter ensuite les fonctionnalités ADDS et DHCP que l'on trouve dans le tableau de bord du serveur, dans Ajout de rôles et de fonctionnalités.
 Cocher l'option de reboot pour garantir une installation propre et achevée avant de continuer.
 
-![Successinstall.png](/assets/Successinstall.png)
+![Successinstall.png](assets/Successinstall.png)
 Installation réussie.
 
 
 ### Configurer l'ADDS
 
-![ConfigDomain.png](/assets/ConfigDomain.png)
+![ConfigDomain.png](assets/ConfigDomain.png)
 Configurer le nom de domaine comme indiqué dans le brief client, rue25.com.
 
-![OptionsCOntrolleur.png](/assets/OptionsCOntrolleur.png)
+![OptionsCOntrolleur.png](assets/OptionsCOntrolleur.png)
 Configurer les options, ajouter le mot de passe. Serveur 2016 par défaut pour la rétrocompatibilité avec du matériel plus ancien.
 
 L’avertissement concernant l’absence de délégation DNS peut être ignoré dans ce contexte, le serveur configuré étant le serveur DNS principal du domaine.
 
-![NetBIOS.png](/assets/NetBIOS.png)
+![NetBIOS.png](assets/NetBIOS.png)
 
 Nom par défaut, rempli automatiquement par l'utilitaire.
 
 
-![VerifSetup.png](/assets/VerifSetup.png)
+![VerifSetup.png](assets/VerifSetup.png)
 La page de vérification de la configuration permet de s'assurer de la bonne configuration avant de procéder à l'écriture de cette dernière. Lorsque la configuration est confirmée, cliquer sur "Installer".
 
-![SuccessLoginPage.png](/assets/SuccessLoginPage.png)
+![SuccessLoginPage.png](assets/SuccessLoginPage.png)
 En cas d'installation réussie, lors du prochain démarrage le préfixe RUE25\ devrait apparaître comme illustré ci-dessus.
 
 ### Configuration du service DHCP
@@ -122,7 +124,7 @@ Depuis le Gestionnaire de serveur, commencer la configuration du serveur DHCP.
 Créer une nouvelle étendue IPv4
 
 
-![Configuration du nom](/assets/20260118142042.png)
+![Configuration du nom](assets/20260118142042.png)
 
 
 Définir une plage de 192.168.1.50 jusque 192.168.1.100.

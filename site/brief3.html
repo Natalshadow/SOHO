@@ -11,16 +11,16 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="index.html">
       
       
-        <link rel="next" href="../brief4/">
+        <link rel="next" href="brief4.html">
       
       
         
       
       
-      <link rel="icon" href="../assets/logo.png">
+      <link rel="icon" href="assets/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="stylesheets/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -92,9 +92,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="SOHO Brief documentations" class="md-header__button md-logo" aria-label="SOHO Brief documentations" data-md-component="logo">
+    <a href="index.html" title="SOHO Brief documentations" class="md-header__button md-logo" aria-label="SOHO Brief documentations" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -237,7 +237,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="index.html" class="md-tabs__link">
         
   
   
@@ -258,7 +258,7 @@
   
   
     <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+      <a href="brief3.html" class="md-tabs__link">
         
   
   
@@ -277,7 +277,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../brief4/" class="md-tabs__link">
+      <a href="brief4.html" class="md-tabs__link">
         
   
   
@@ -296,7 +296,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../configuration/" class="md-tabs__link">
+      <a href="configuration.html" class="md-tabs__link">
         
   
   
@@ -331,9 +331,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="SOHO Brief documentations" class="md-nav__button md-logo" aria-label="SOHO Brief documentations" data-md-component="logo">
+    <a href="index.html" title="SOHO Brief documentations" class="md-nav__button md-logo" aria-label="SOHO Brief documentations" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="assets/logo.png" alt="logo">
 
     </a>
     SOHO Brief documentations
@@ -348,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         
   
   
@@ -402,7 +402,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="brief3.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -576,7 +576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../brief4/" class="md-nav__link">
+      <a href="brief4.html" class="md-nav__link">
         
   
   
@@ -603,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+      <a href="configuration.html" class="md-nav__link">
         
   
   
@@ -851,10 +851,6 @@ graph TD
     OU_IMM --- G_IMM
     OU_CPTA --- G_CPTA
 
-    %% Exemple d'utilisateurs (facultatif pour la lisibilité)
-    G_DIR -.-> Samira[Samira BIEN]
-    G_CPTA -.-> Vincent[Vincent TYME]
-
     %% Style pour différencier les types d'objets
     style Domaine fill:#f96,stroke:#333,stroke-width:2px
     style G_DIR fill:#dfd,stroke:#333
@@ -863,22 +859,24 @@ graph TD
     style G_CPTA fill:#dfd,stroke:#333
 </div>
 <h2 id="preparation-de-lenvironnement">Préparation de l'environnement<a class="headerlink" href="#preparation-de-lenvironnement" title="Permanent link">&para;</a></h2>
-<p><img alt="Résumé VM" src="/assets/vm-summary.png" /></p>
-<p>Préparer une machine virtuelle avec Virtual Box. Configuration des  ressources virtuelles.
-4096 MB de RAM et 2 CPU Cores avec 50Gb d'espace disque. Devrait suffire largement sans priver l'OS principal de ressources.</p>
+<p><img alt="Résumé VM" src="assets/vm-summary.png" />
+<img alt="Server Selection" src="assets/ServerSelectionSetup.png" /></p>
+<p>Préparer une machine virtuelle avec Virtual Box. Configuration des ressources virtuelles.
+<img alt="Virtual Resources" src="assets/vm-virtual-resources.png" />
+4096 MB de RAM et 2 CPU Cores avec 50 Go d'espace disque. Devrait suffire largement sans priver l'OS principal de ressources.</p>
 <p>La première tentative de boot de l'OS échoue avec une erreur de contrat de licence invalide. 
-Résolution: Ouvrir les paramètres de la VM, puis onglet "Système" et confirmer que la configuration des ressources a bien été enregistrée.
+Résolution : Ouvrir les paramètres de la VM, puis onglet "Système" et confirmer que la configuration des ressources a bien été enregistrée.
 Puis onglet "Stockage", supprimer le "unattended setup" avec l'icône de disquette et relancer.</p>
-<p><img alt="ServerSelectionSetup.png" src="/assets/ServerSelectionSetup.png" /></p>
+<p><img alt="ServerSelectionSetup.png" src="assets/ServerSelectionSetup.png" /></p>
 <p>Sélectionner le type de serveur à installer. Choisir l'environnement desktop.</p>
-<p><img alt="Configuration administrateur" src="/assets/AdminConfig.png" /></p>
+<p><img alt="Configuration administrateur" src="assets/AdminConfig.png" /></p>
 <p>Pour la gestion des accès, configuration d'un mot de passe complexe pour le compte Administrateur. Dans une infrastructure plus large, on pourrait centraliser la gestion des identités avec une solution comme Authentik ou des solutions professionnelles comme CyberArk pour sécuriser les comptes à hauts privilèges.</p>
 <p>Au démarrage de l'OS, autoriser la découverte réseau.</p>
-<p><img alt="Snapshop VM" src="/assets/Snapshot1.png" /></p>
+<p><img alt="Snapshop VM" src="assets/Snapshot1.png" /></p>
 <p>Réalisation d'une première snapshot post-installation avec une base d'OS fonctionnel  sans aucune autre action importante réalisée. Permet de revenir à un état propre en cas de problème ou de dupliquer l'OS pour une autre utilité ou configuration tout en garantissant l'homogénéité de la configuration appliquée.</p>
 <h3 id="debut-de-la-configuration-du-serveur">Début de la configuration du serveur<a class="headerlink" href="#debut-de-la-configuration-du-serveur" title="Permanent link">&para;</a></h3>
 <p>Renommer le serveur en SRV-AD-RUE25</p>
-<p><img alt="ConfigIPServ.png" src="/assets/ConfigIPServ.png" />
+<p><img alt="ConfigIPServ.png" src="assets/ConfigIPServ.png" />
 Configuration du panel IPv4, définition de l'IP, masque, passerelle et DNS par défaut. Définir une IP fixe permet de garantir la pérennité de l'accès au serveur.</p>
 <table>
 <thead>
@@ -898,71 +896,71 @@ Configuration du panel IPv4, définition de l'IP, masque, passerelle et DNS par 
 </table>
 <p>Ajouter ensuite les fonctionnalités ADDS et DHCP que l'on trouve dans le tableau de bord du serveur, dans Ajout de rôles et de fonctionnalités.
 Cocher l'option de reboot pour garantir une installation propre et achevée avant de continuer.</p>
-<p><img alt="Successinstall.png" src="/assets/Successinstall.png" />
+<p><img alt="Successinstall.png" src="assets/Successinstall.png" />
 Installation réussie.</p>
 <h3 id="configurer-ladds">Configurer l'ADDS<a class="headerlink" href="#configurer-ladds" title="Permanent link">&para;</a></h3>
-<p><img alt="ConfigDomain.png" src="/assets/ConfigDomain.png" />
+<p><img alt="ConfigDomain.png" src="assets/ConfigDomain.png" />
 Configurer le nom de domaine comme indiqué dans le brief client, rue25.com.</p>
-<p><img alt="OptionsCOntrolleur.png" src="/assets/OptionsCOntrolleur.png" />
+<p><img alt="OptionsCOntrolleur.png" src="assets/OptionsCOntrolleur.png" />
 Configurer les options, ajouter le mot de passe. Serveur 2016 par défaut pour la rétrocompatibilité avec du matériel plus ancien.</p>
 <p>L’avertissement concernant l’absence de délégation DNS peut être ignoré dans ce contexte, le serveur configuré étant le serveur DNS principal du domaine.</p>
-<p><img alt="NetBIOS.png" src="/assets/NetBIOS.png" /></p>
+<p><img alt="NetBIOS.png" src="assets/NetBIOS.png" /></p>
 <p>Nom par défaut, rempli automatiquement par l'utilitaire.</p>
-<p><img alt="VerifSetup.png" src="/assets/VerifSetup.png" />
+<p><img alt="VerifSetup.png" src="assets/VerifSetup.png" />
 La page de vérification de la configuration permet de s'assurer de la bonne configuration avant de procéder à l'écriture de cette dernière. Lorsque la configuration est confirmée, cliquer sur "Installer".</p>
-<p><img alt="SuccessLoginPage.png" src="/assets/SuccessLoginPage.png" />
+<p><img alt="SuccessLoginPage.png" src="assets/SuccessLoginPage.png" />
 En cas d'installation réussie, lors du prochain démarrage le préfixe RUE25\ devrait apparaître comme illustré ci-dessus.</p>
 <h3 id="configuration-du-service-dhcp">Configuration du service DHCP<a class="headerlink" href="#configuration-du-service-dhcp" title="Permanent link">&para;</a></h3>
 <p>Depuis le Gestionnaire de serveur, commencer la configuration du serveur DHCP. 
 Créer une nouvelle étendue IPv4</p>
-<p><img alt="Configuration du nom" src="/assets/20260118142042.png" /></p>
+<p><img alt="Configuration du nom" src="assets/20260118142042.png" /></p>
 <p>Définir une plage de 192.168.1.50 jusque 192.168.1.100.
 Cette plage laisse la possibilité d'agrandir le parc informatique tout en conservant des adresses IP disponibles pour des appareils dont la configuration est statique, tels que les deux imprimantes demandées.</p>
 <p>Saisir l'adresse IP du routeur : 192.168.1.1 dans ce contexte.
-<img alt="IPRouteur" src="../assets/20260118142322.png" /></p>
-<p><img alt="NomDomaine_et_DNS" src="../assets/20260118142418.png" />
-Vérifier que le nom de domaine s'est bien propagé et qu'on retrouve l'ip du serveur.</p>
+<img alt="IPRouteur" src="assets/20260118142322.png" /></p>
+<p><img alt="NomDomaine_et_DNS" src="assets/20260118142418.png" />
+Vérifier que le nom de domaine s'est bien propagé et qu'on retrouve l'IP du serveur.</p>
 <p>Laisser la page de configuration Server WINS vide.
 Activer l'étendue qu'on vient de configurer.</p>
-<p><img alt="" src="../assets/20260118142645.png" /></p>
+<p><img alt="" src="assets/20260118142645.png" /></p>
 <h3 id="gestion-de-lannuaire-utilisateurs-groupes-ou">Gestion de l'annuaire (utilisateurs, groupes, OU)<a class="headerlink" href="#gestion-de-lannuaire-utilisateurs-groupes-ou" title="Permanent link">&para;</a></h3>
 <p>Ensuite, créer la structure par service :</p>
-<p><img alt="groupes_services" src="../assets/20260118143246.png" /></p>
+<p><img alt="groupes_services" src="assets/20260118143246.png" /></p>
 <p>Une fois les 4 unités d'organisation créées, créer les utilisateurs :</p>
 <p>Profil 1
-<img alt="NouvelObjetUtilisateur" src="../assets/20260118143521.png" />
-<img alt="NouvelObjetUtilisateur_password" src="../assets/20260118143621.png" />
+<img alt="NouvelObjetUtilisateur" src="assets/20260118143521.png" />
+<img alt="NouvelObjetUtilisateur_password" src="assets/20260118143621.png" />
 Définir un mot de passe.
-Le changement de mot de passe à la prochaine ouverture a volontairement été décoché et la non expiration du mot de passe a été coché dans le cadre de l'exercice.
+Le changement de mot de passe à la prochaine ouverture a volontairement été décoché et la non-expiration du mot de passe a été cochée dans le cadre de l'exercice.
 Dans un contexte de production, un changement de mot de passe à la première ouverture de session serait recommandé afin d’améliorer la sécurité.</p>
-<p><img alt="NOU_collision_nom" src="../assets/20260118143951.png" /></p>
+<p><img alt="NOU_collision_nom" src="assets/20260118143951.png" /></p>
 <p>Une collision de nom de connexion est détectée entre deux utilisateurs partageant les mêmes initiales.
 Dans le cadre de cet exercice, le nom de connexion de l’un des comptes est modifié par l’ajout d’un caractère afin d’éviter le conflit.</p>
 <p>D’autres conventions de nommage peuvent être mises en place afin de limiter les collisions, telles que l’utilisation du prénom et du nom complets ou l’ajout d’un suffixe numérique.
 Dans des environnements de plus grande taille, une modification globale de la nomenclature peut s’avérer complexe à mettre en œuvre une fois la production démarrée.</p>
-<p>Ajouter les utilisateurs à leurs groupes de sécurité respectifs:
-<img alt="UtilisateursDansGroupes" src="../assets/20260118153424.png" /></p>
+<p>Ajouter les utilisateurs à leurs groupes de sécurité respectifs :
+<img alt="UtilisateursDansGroupes" src="assets/20260118153424.png" /></p>
 <p>Une fois terminé, vérifier que les utilisateurs appartiennent bien à leur groupe.</p>
-<p><img alt="ConfirmationUsersInGroup" src="../assets/20260118153527.png" /></p>
+<p><img alt="ConfirmationUsersInGroup" src="assets/20260118153527.png" /></p>
 <h3 id="creation-et-securisation-des-dossiers-partages">Création et sécurisation des dossiers partagés<a class="headerlink" href="#creation-et-securisation-des-dossiers-partages" title="Permanent link">&para;</a></h3>
 <p>Créer une arborescence dédiée aux dossiers partagés par service.
-<img alt="DirectoriesCreation" src="../assets/20260118153756.png" /></p>
+<img alt="DirectoriesCreation" src="assets/20260118153756.png" /></p>
 <h3 id="configuration-du-partage-par-groupe">Configuration du partage par groupe<a class="headerlink" href="#configuration-du-partage-par-groupe" title="Permanent link">&para;</a></h3>
-<p>Retirer "Tout le monde" des propriété du partage. Ajouter le(s) groupe(s) correspondant(s).
-<img alt="Sharegroupmanagement" src="../assets/20260118153939.png" /></p>
+<p>Retirer "Tout le monde" des propriétés du partage. Ajouter le(s) groupe(s) correspondant(s).
+<img alt="Sharegroupmanagement" src="assets/20260118153939.png" /></p>
 <p>Reproduire la même procédure dans l'onglet sécurité. Désactiver l'héritage pour définir les droits d'accès et de lecture par groupe.
-<img alt="ShareDirSecurityTab_inheritance" src="../assets/20260118154639.png" />
+<img alt="ShareDirSecurityTab_inheritance" src="assets/20260118154639.png" />
 Supprimer la ligne "Utilisateurs" ou lui retirer l'intégralité de ses droits pour ne pas avoir de fuite d'accès.
-<img alt="DeleteUsers" src="../assets/20260118154719.png" /></p>
-<p>Le dossier partagé comptabilité est donc accessible en lecture/écriture pour le groupe G_COMPTABLES, lisible par le groupe G_DIRECTION, et inaccessible pour les autres. On protégère ainsi les fichiers d'une mauvaise écriture par un service non concerné et on empêche la lecture de documents sensibles par des personnes non concernées. Application du principe de Least Privilege. </p>
+<img alt="DeleteUsers" src="assets/20260118154719.png" /></p>
+<p>Le dossier partagé comptabilité est donc accessible en lecture/écriture pour le groupe G_COMPTABLES, lisible par le groupe G_DIRECTION, et inaccessible pour les autres. On protégè ainsi les fichiers d'une mauvaise écriture par un service non concerné et on empêche la lecture de documents sensibles par des personnes non concernées. Application du principe de Least Privilege. </p>
 <p>Reproduire la même procédure pour les autres dossiers partagés.</p>
 <p>Redémarrer une dernière fois pour s'assurer de l'enregistrement et de l'application de toutes les modifications réalisées.</p>
 <h3 id="quelques-tests-de-validation">Quelques tests de validation<a class="headerlink" href="#quelques-tests-de-validation" title="Permanent link">&para;</a></h3>
 <p>Vérification finale : taper dans un terminal nslookup rue25.com pour vérifier si la configuration a tenu. </p>
-<p><img alt="CMD_nslookup" src="../assets/20260118160456.png" />
+<p><img alt="CMD_nslookup" src="assets/20260118160456.png" />
 La configuration est bonne.</p>
 <p>Puis vérifier les utilisateurs :</p>
-<p><img alt="cmd netusers" src="../assets/20260118160740.png" />
+<p><img alt="cmd netusers" src="assets/20260118160740.png" />
 Ils sont tous bien présents.
 Le brief partie 3 se conclut ainsi.</p>
 <h3 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
@@ -1002,7 +1000,7 @@ Le brief partie 3 se conclut ainsi.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+          <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1019,7 +1017,7 @@ Le brief partie 3 se conclut ainsi.</p>
         
         
           
-          <a href="../brief4/" class="md-footer__link md-footer__link--next" aria-label="Next: Brief 4">
+          <a href="brief4.html" class="md-footer__link md-footer__link--next" aria-label="Next: Brief 4">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
@@ -1077,10 +1075,10 @@ Le brief partie 3 se conclut ainsi.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.footer", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.footer", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
       
