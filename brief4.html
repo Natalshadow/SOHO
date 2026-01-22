@@ -522,10 +522,27 @@
   <a href="#mise-a-jour-de-glpi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mise à jour de glpi
+        Mise à jour de GLPI
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Mise à jour de GLPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mise-a-jour-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mise à jour mariadb
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -661,10 +678,27 @@
   <a href="#mise-a-jour-de-glpi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mise à jour de glpi
+        Mise à jour de GLPI
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Mise à jour de GLPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mise-a-jour-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mise à jour mariadb
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -836,9 +870,9 @@ On sélectionne la base de données existante : glpi</p>
 Réussi, on a bien tous les comptes créés par défaut :
 <img alt="Image" src="assets/20260118180949.png" />
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.</p>
-<h3 id="mise-a-jour-de-glpi">Mise à jour de glpi<a class="headerlink" href="#mise-a-jour-de-glpi" title="Permanent link">&para;</a></h3>
+<h3 id="mise-a-jour-de-glpi">Mise à jour de GLPI<a class="headerlink" href="#mise-a-jour-de-glpi" title="Permanent link">&para;</a></h3>
 <div class="admonition danger">
-<p class="admonition-title">Réaliser une sauvegarde de la base de données.</p>
+<p class="admonition-title">Important : réaliser une sauvegarde de la base de données.</p>
 </div>
 <p>Télécharger la version à jour ou la version souhaitée via github ou wget.
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
@@ -897,13 +931,75 @@ Vérifier la mise à jour avec la commande :
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php8.2<span class="w"> </span>bin/console<span class="w"> </span>system:check_requirements
 </span></code></pre></div></td></tr></table></div>
 Source : https://help.glpi-project.org/faq/glpi/installation_update</p>
-<p>S'assurer des bonnes permissions pour permettre la lecture du fichier downstream et par conséquent de la base de données :
+<p>S'assurer des bonnes permissions pour permettre la lecture du fichier downstream et par conséquent de la base de données :</p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a>sudo<span class="w"> </span>chown<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/glpi/inc/downstream.php
+</span></code></pre></div></td></tr></table></div>
+<p>Vérifier à nouveau si la mise à jour base de données fonctionne :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a>/var/www/glpi$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php8.2<span class="w"> </span>bin/console<span class="w"> </span>db:update
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>&gt;Some<span class="w"> </span>mandatory<span class="w"> </span>system<span class="w"> </span>requirements<span class="w"> </span>are<span class="w"> </span>missing:
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>&gt;<span class="w"> </span>-<span class="w"> </span>Database<span class="w"> </span>engine<span class="w"> </span>version<span class="w"> </span><span class="o">(</span><span class="m">10</span>.5.29<span class="o">)</span><span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>supported.<span class="w"> </span>Minimum<span class="w"> </span>required<span class="w"> </span>version<span class="w"> </span>is<span class="w"> </span>MariaDB<span class="w"> </span><span class="m">10</span>.6.
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>&gt;Run<span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;php bin/console system:check_requirements&quot;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>details.
 </span></code></pre></div></td></tr></table></div></p>
+<h4 id="mise-a-jour-mariadb">Mise à jour mariadb<a class="headerlink" href="#mise-a-jour-mariadb" title="Permanent link">&para;</a></h4>
+<p>Source : https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/installing-mariadb/binary-packages/mariadb-package-repository-setup-and-usage#mariadb_repo_setup</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span>
+<span class="normal"><a href="#__codelineno-20-4">4</a></span>
+<span class="normal"><a href="#__codelineno-20-5">5</a></span>
+<span class="normal"><a href="#__codelineno-20-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a>curl<span class="w"> </span>-LsSO<span class="w"> </span>https://r.mariadb.com/downloads/mariadb_repo_setup
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">checksum</span><span class="si">}</span><span class="s2"> mariadb_repo_setup&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span>-c<span class="w"> </span>-
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>mariadb_repo_setup
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mariadb-server<span class="w"> </span>mariadb-client
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>sudo<span class="w"> </span>mariadb-upgrade
+</span></code></pre></div></td></tr></table></div>
+<p>Conformément aux nouvelles directives de sécurité de GLPI 11, le point d'entrée web a été restreint au répertoire /public. Cette isolation empêche l'accès direct aux fichiers sensibles à la racine.</p>
+<p>Configuration du VirtualHost Apache (/etc/apache2/sites-available/glpi.conf) :</p>
+<p><div class="language-Apache highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span>
+<span class="normal"><a href="#__codelineno-21-5">5</a></span>
+<span class="normal"><a href="#__codelineno-21-6">6</a></span>
+<span class="normal"><a href="#__codelineno-21-7">7</a></span>
+<span class="normal"><a href="#__codelineno-21-8">8</a></span>
+<span class="normal"><a href="#__codelineno-21-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nt">&lt;VirtualHost</span><span class="w"> </span><span class="s">*:80</span><span class="nt">&gt;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">   </span><span class="nb">DocumentRoot</span><span class="w"> </span><span class="sx">/var/www/glpi/public</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">   </span><span class="nt">&lt;Directory</span><span class="w"> </span><span class="s">/var/www/glpi/public</span><span class="nt">&gt;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">      </span><span class="nb">AllowOverride</span><span class="w"> </span><span class="k">All</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">      </span><span class="nb">RewriteEngine</span><span class="w"> </span><span class="k">On</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">      </span><span class="nb">RewriteCond</span><span class="w"> </span>%{REQUEST_FILENAME}<span class="w"> </span>!-f
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">      </span><span class="nb">RewriteRule</span><span class="w"> </span>^(.*)$<span class="w"> </span>index.php<span class="w"> </span>[QSA,L]
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">   </span><span class="nt">&lt;/Directory&gt;</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="nt">&lt;/VirtualHost&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+Activer le module "rewrite" :</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a>sudo<span class="w"> </span>a2enmod<span class="w"> </span>rewrite
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>sudo<span class="w"> </span>a2ensite<span class="w"> </span>glpi.conf
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a>sudo<span class="w"> </span>a2dissite<span class="w"> </span><span class="m">000</span>-default.conf
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+</span></code></pre></div></td></tr></table></div>
+<p>Rétablir la connectivité SQL.
+Rétablir le fichier /etc/glpi/config_db.php pour lier l'application à la base MariaDB avec l'utilisateur glpi_admin pour restaurer l'accès à GLPI après la mise à niveau.</p>
+<p>Relancer une migration :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nb">cd</span><span class="w"> </span>/var/www/glpi
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php8.2<span class="w"> </span>bin/console<span class="w"> </span>db:update
+</span></code></pre></div></td></tr></table></div></p>
+<p>Plus aucune erreur ne devrait s'afficher et la mise à jour devrait être réussie.</p>
 <h3 id="pour-aller-plus-loin">Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Permanent link">&para;</a></h3>
-<p>Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinente. Le docker-compose.yaml ressemblerait à :</p>
-<p><img alt="Image" src="assets/20260118182627.png" />
-Source :
+<p>Il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinente. Le docker-compose.yaml ressemblerait à :</p>
+<p><img alt="Image" src="assets/20260118182627.png" /></p>
+<p>L'avantage majeur d'un déploiement Docker, notamment via docker-compose serait la facilité de mise à jour par rapport à la méthode manuelle décrite ci-dessus.
+Avec un docker-compose qui va chercher le tag #latest, il suffit de lancer la commande docker compose pull et relancer le container. </p>
+<p>Source :
 https://help.glpi-project.org/tutorials/fr/procedures/running_glpi_on_docker
 Il suffirait alors de créer le fichier .env, adapter les bind mounts et ajouter un service pour un reverse proxy (nginx par exemple) ou ajouter un tunnel Cloudflared pour bénéficier des protections de Cloudflared.</p>
 
