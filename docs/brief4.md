@@ -6,32 +6,30 @@
 20260119
 ### Brief part 4
 
-Créer une VM en Debian 11.6.
-![ServerSelectionSetup.png](/assets/ServerSelectionSetup.png)
+Créer une VM en Debian 11.6. 
+|CPU|RAM|Stockage|
+----|---|---------
+|1|2 Go|20 Go|
 
-![Pasted image 20260118161746.png](/asset/20260118161746.png)
-![[Pasted image 20260118161806.png]]
-
-![[Pasted image 20260118161838.png]]
 Définir le nom sur srv-glpi et du domaine sur rue25.com.
 
-![[Pasted image 20260118162259.png]]
+![Image](assets/20260118162259.png)
 Après création du compte admin, créer la partition disque.
 
-![[Pasted image 20260118162337.png]]
+![Image](assets/20260118162337.png)
 On décoche la DE pour partir en Headless et on active SSH conformément aux consignes du brief et afin d’éviter une reconfiguration post-installation.
 
-![[Pasted image 20260118162825.png]]
+![Image](assets/20260118162825.png)
 L'os démarre après l'utilitaire d'installation.
 
-![[Pasted image 20260118163125.png]]
+![Image](assets/20260118163125.png)
 Vérifier si SSH s'est mis en marche correctement, cela permet de poursuivre le travail depuis un poste remote.
 
 
-![[Pasted image 20260118163159.png]]
+![Image](assets/20260118163159.png)
 SSH fonctionnel, prouvé par la possibilité de s'y connecter depuis un autre PC.
 
-![[Pasted image 20260118163658.png]]
+![Image](assets/20260118163658.png)
 Installer sudo via su- puis ajouter l'utilisateur au groupe sudo. Nécessaire pour l'installation des paquets.
 Ensuite se référer à la documentation officielle de GLPI ici :
 https://glpi-install.readthedocs.io/en/latest/prerequisites.html et https://glpi-install.readthedocs.io/en/latest/install/index.html
@@ -77,39 +75,39 @@ sudo chown -R www-data:www-data /var/www/glpi sudo chmod -R 755 /var/www/glpi
 ```
 
 Création du fichier downstream
-![[Pasted image 20260118170700.png]]
+![Image](assets/20260118170700.png)
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/config /etc/glpi/
 admintest@srv-glpi:/tmp$ sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
 admintest@srv-glpi:/tmp$ sudo nano /var/www/glpi/inc/downstream.php
 
 Dorénavant l'interface web est accessible à l'adresse 
 http://192.168.1.12/glpi/install/install.php
-![[Pasted image 20260118165219.png]]
+![Image](assets/20260118165219.png)
 
 
 On accepte les ToS.
 On choisit "Installer"
 L'utilitaire signale plusieurs problèmes à corriger, ce qu'on va faire :
-![[Pasted image 20260118165549.png]]
+![Image](assets/20260118165549.png)
 Un avertissement concernant la version de PHP est signalé. Le choix a été fait de conserver la version fournie par Debian afin de bénéficier des correctifs de sécurité du dépôt officiel. Ce choix est considéré compatible avec le bon fonctionnement de GLPI dans ce contexte.
 
 On remplit ensuite le formulaire de connexion avec les infos qu'on a placé dans la commande plus tôt
-![[Pasted image 20260118180550.png]]La connexion a réussi
-![[Pasted image 20260118180628.png]]
+![Image](assets/20260118180550.png)La connexion a réussi
+![Image](assets/20260118180628.png)
 On sélectionne la db qu'on a déjà créé, glpi
 Formulaire concernant la récolte des données
-![[Pasted image 20260118180808.png]]
+![Image](assets/20260118180808.png)
 
 
 Test de connexion avec le compte admin:
-![[Pasted image 20260118180853.png]]
+![Image](assets/20260118180853.png)
 Réussi, on a bien tous les comptés créés par défaut :
-![[Pasted image 20260118180949.png]]
+![Image](assets/20260118180949.png)
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.
 
 Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinnente. Le docker-compose.yaml ressemblerait à :
 
-![[Pasted image 20260118182627.png]]
+![Image](assets/20260118182627.png)
 Source :
 https://help.glpi-project.org/tutorials/fr/procedures/running_glpi_on_docker
 Il suffirait alors de créer le fichier .env, adapter les bind mounts et ajouter un service pour un reverse proxy (nginx par exemple) ou ajouter un tunnel Cloudflared pour bénéficier des protections de Cloudflared.
