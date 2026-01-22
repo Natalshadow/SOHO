@@ -93,7 +93,7 @@ sudo cp -rp /var/www/glpi/config /etc/glpi/
 sudo cp -rp /var/www/glpi/files /var/lib/glpi/files/
 sudo nano /var/www/glpi/inc/downstream.php
 ```
-Créer unfichier downstream.php qui contient :
+Créer un fichier downstream.php qui contient :
 ```php
 <?php
 define('GLPI_CONFIG_DIR', '/etc/glpi/');
@@ -102,6 +102,7 @@ if (file_exists(GLPI_CONFIG_DIR . '/local_define.php')) {
    require_once GLPI_CONFIG_DIR . '/local_define.php';
 }
 ```
+
 
 Puis créer le fichier /etc/glpi/local_define.php qui contient :
 ```php
@@ -132,15 +133,144 @@ On sélectionne la base de données existante : glpi
 
 Tester la connexion avec le compte admin:
 ![Image](assets/20260118180853.png)
-Réussi, on a bien tous les comptés créés par défaut :
+Réussi, on a bien tous les comptes créés par défaut :
 ![Image](assets/20260118180949.png)
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.
+### Mise à jour de GLPI
+!!! danger "Important : réaliser une sauvegarde de la base de données."
+Télécharger la version à jour ou la version souhaitée via github ou wget.
+```bash
+wget https://github.com/glpi-project/glpi/releases/download/x.x.x/glpi-x.x.x.tgz
+tar -xvzf glpi-x.x.x.tgz
+```
+Supprimer les data applicatifs de l'ancienne version :
+```bash
+sudo rm -rf /var/www/glpi/* 
+sudo cp -r glpi/* /var/www/glpi/
+sudo chown -R www-data:www-data /var/www/glpi
+```
+
+Recréer le fichier downstream de la même manière qu'à l'installation.
+```php
+<?php
+define('GLPI_CONFIG_DIR', '/etc/glpi/');
+
+if (file_exists(GLPI_CONFIG_DIR . '/local_define.php')) {
+   require_once GLPI_CONFIG_DIR . '/local_define.php';
+}
+```
+Lancer ensuite la migration PHP. 
+```bash
+sudo -u www-data php /var/www/glpi/bin/console db:update
+```
+
+Si la version PHP est trop ancienne, une erreur telle que ci-dessous pourrait s'afficher :
+```bash
+/var/www/glpi$ sudo -u www-data php bin/console db:update
+>PHP Parse error:  syntax error, unexpected 'private' (T_PRIVATE), expecting variable (T_VARIABLE) in /var/www/glpi/src/Glpi/Application/ResourcesChecker.php on line 42
+```
+Auquel cas, il est nécessaire de passer à une version de PHP plus récente qui n'est pas proposée dans le dépôt par défaut de Debian.
+Une version à jour peut être obtenue ici :
+https://codeberg.org/oerdnj/deb.sury.org
+
+Utiliser le script d'installation fourni :
+```bash
+curl -sSL https://packages.sury.org/php/README.txt | sudo bash -x
+sudo apt update
+```
+Ensuite, vérifier les paquets manquants :
+
+```bash
+sudo -u www-data php8.2 bin/console db:update
+>Some mandatory system requirements are missing:
+> - bcmath extension is missing
+>Run the "php bin/console system:check_requirements" command for more details.
+```
+
+Installer les paquets manquants (adapter la liste au résultat précédent) :
+```bash
+sudo apt install -y php8.2-bcmath
+```
+Vérifier la mise à jour avec la commande :
+```bash
+sudo -u www-data php8.2 bin/console system:check_requirements
+```
+Source : https://help.glpi-project.org/faq/glpi/installation_update
+
+S'assurer des bonnes permissions pour permettre la lecture du fichier downstream et par conséquent de la base de données :
+
+```bash
+sudo chown www-data:www-data /var/www/glpi/inc/downstream.php
+```
+
+
+Vérifier à nouveau si la mise à jour base de données fonctionne :
+```bash
+/var/www/glpi$ sudo -u www-data php8.2 bin/console db:update
+>Some mandatory system requirements are missing:
+> - Database engine version (10.5.29) is not supported. Minimum required version is MariaDB 10.6.
+>Run the "php bin/console system:check_requirements" command for more details.
+```
+
+#### Mise à jour mariadb
+Source : https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/installing-mariadb/binary-packages/mariadb-package-repository-setup-and-usage#mariadb_repo_setup
+
+```bash
+curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup
+echo "${checksum} mariadb_repo_setup" | sha256sum -c -
+chmod +x mariadb_repo_setup
+sudo apt update
+sudo apt install -y mariadb-server mariadb-client
+sudo mariadb-upgrade
+```
+
+Conformément aux nouvelles directives de sécurité de GLPI 11, le point d'entrée web a été restreint au répertoire /public. Cette isolation empêche l'accès direct aux fichiers sensibles à la racine.
+
+Configuration du VirtualHost Apache (/etc/apache2/sites-available/glpi.conf) :
+
+```Apache
+<VirtualHost *:80>
+   DocumentRoot /var/www/glpi/public
+   <Directory /var/www/glpi/public>
+      AllowOverride All
+      RewriteEngine On
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteRule ^(.*)$ index.php [QSA,L]
+   </Directory>
+</VirtualHost>
+```
+Activer le module "rewrite" :
+
+```bash
+sudo a2enmod rewrite
+sudo a2ensite glpi.conf
+sudo a2dissite 000-default.conf
+sudo systemctl restart apache2
+```
+
+Rétablir la connectivité SQL.
+Rétablir le fichier /etc/glpi/config_db.php pour lier l'application à la base MariaDB avec l'utilisateur glpi_admin pour restaurer l'accès à GLPI après la mise à niveau.
+
+Relancer une migration :
+```bash
+cd /var/www/glpi
+sudo -u www-data php8.2 bin/console db:update
+```
+
+Plus aucune erreur ne devrait s'afficher et la mise à jour devrait être réussie.
+
+
+
 
 ### Pour aller plus loin
 
-Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinnente. Le docker-compose.yaml ressemblerait à :
+Il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinente. Le docker-compose.yaml ressemblerait à :
 
 ![Image](assets/20260118182627.png)
+
+L'avantage majeur d'un déploiement Docker, notamment via docker-compose serait la facilité de mise à jour par rapport à la méthode manuelle décrite ci-dessus.
+Avec un docker-compose qui va chercher le tag #latest, il suffit de lancer la commande docker compose pull et relancer le container. 
+
 Source :
 https://help.glpi-project.org/tutorials/fr/procedures/running_glpi_on_docker
 Il suffirait alors de créer le fichier .env, adapter les bind mounts et ajouter un service pour un reverse proxy (nginx par exemple) ou ajouter un tunnel Cloudflared pour bénéficier des protections de Cloudflared.

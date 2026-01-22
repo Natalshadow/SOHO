@@ -519,6 +519,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mise-a-jour-de-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mise à jour de glpi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pour-aller-plus-loin" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -640,6 +651,17 @@
     <span class="md-ellipsis">
       
         Paramétrage GUI de GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mise-a-jour-de-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mise à jour de glpi
       
     </span>
   </a>
@@ -775,7 +797,7 @@ Ensuite se référer à la documentation officielle de GLPI ici :</p>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-rp<span class="w"> </span>/var/www/glpi/files<span class="w"> </span>/var/lib/glpi/files/
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/var/www/glpi/inc/downstream.php
 </span></code></pre></div></td></tr></table></div>
-Créer unfichier downstream.php qui contient :
+Créer un fichier downstream.php qui contient :
 <div class="language-php highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
@@ -811,11 +833,75 @@ Connexion établie.</p>
 On sélectionne la base de données existante : glpi</p>
 <p>Tester la connexion avec le compte admin:
 <img alt="Image" src="assets/20260118180853.png" />
-Réussi, on a bien tous les comptés créés par défaut :
+Réussi, on a bien tous les comptes créés par défaut :
 <img alt="Image" src="assets/20260118180949.png" />
 A ce stade, il reste à créer les vrais comptes, bloquer, modifier ou supprimer les comptes par défaut inutilisés pour ne pas avoir de faille évidente. Supprimer les fichiers d'installation qui ont été utilisés pour garder un environnement propre pour se simplifier la vie lors de potentiels diagnostiques futurs et être sûr de ne pas laisser la possibilité de déclencher une installation malencontreuse et casser celle en place.</p>
+<h3 id="mise-a-jour-de-glpi">Mise à jour de glpi<a class="headerlink" href="#mise-a-jour-de-glpi" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">Réaliser une sauvegarde de la base de données.</p>
+</div>
+<p>Télécharger la version à jour ou la version souhaitée via github ou wget.
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a>wget<span class="w"> </span>https://github.com/glpi-project/glpi/releases/download/x.x.x/glpi-x.x.x.tgz
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>tar<span class="w"> </span>-xvzf<span class="w"> </span>glpi-x.x.x.tgz
+</span></code></pre></div></td></tr></table></div>
+Supprimer les data applicatifs de l'ancienne version :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/www/glpi/*<span class="w"> </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>glpi/*<span class="w"> </span>/var/www/glpi/
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/glpi
+</span></code></pre></div></td></tr></table></div></p>
+<p>Recréer le fichier downstream de la même manière qu'à l'installation.
+<div class="language-php highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;GLPI_CONFIG_DIR&#39;</span><span class="p">,</span> <span class="s1">&#39;/etc/glpi/&#39;</span><span class="p">);</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nx">GLPI_CONFIG_DIR</span> <span class="o">.</span> <span class="s1">&#39;/local_define.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a>   <span class="k">require_once</span> <span class="nx">GLPI_CONFIG_DIR</span> <span class="o">.</span> <span class="s1">&#39;/local_define.php&#39;</span><span class="p">;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Lancer ensuite la migration PHP. 
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>/var/www/glpi/bin/console<span class="w"> </span>db:update
+</span></code></pre></div></td></tr></table></div></p>
+<p>Si la version PHP est trop ancienne, une erreur telle que ci-dessous pourrait s'afficher :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>/var/www/glpi$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>bin/console<span class="w"> </span>db:update
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>&gt;PHP<span class="w"> </span>Parse<span class="w"> </span>error:<span class="w">  </span>syntax<span class="w"> </span>error,<span class="w"> </span>unexpected<span class="w"> </span><span class="s1">&#39;private&#39;</span><span class="w"> </span><span class="o">(</span>T_PRIVATE<span class="o">)</span>,<span class="w"> </span>expecting<span class="w"> </span>variable<span class="w"> </span><span class="o">(</span>T_VARIABLE<span class="o">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>/var/www/glpi/src/Glpi/Application/ResourcesChecker.php<span class="w"> </span>on<span class="w"> </span>line<span class="w"> </span><span class="m">42</span>
+</span></code></pre></div></td></tr></table></div>
+Auquel cas, il est nécessaire de passer à une version de PHP plus récente qui n'est pas proposée dans le dépôt par défaut de Debian.
+Une version à jour peut être obtenue ici :
+https://codeberg.org/oerdnj/deb.sury.org</p>
+<p>Utiliser le script d'installation fourni :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a>curl<span class="w"> </span>-sSL<span class="w"> </span>https://packages.sury.org/php/README.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>-x
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span></code></pre></div></td></tr></table></div>
+Ensuite, vérifier les paquets manquants :</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php8.2<span class="w"> </span>bin/console<span class="w"> </span>db:update
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>&gt;Some<span class="w"> </span>mandatory<span class="w"> </span>system<span class="w"> </span>requirements<span class="w"> </span>are<span class="w"> </span>missing:
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>&gt;<span class="w"> </span>-<span class="w"> </span>bcmath<span class="w"> </span>extension<span class="w"> </span>is<span class="w"> </span>missing
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a>&gt;Run<span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;php bin/console system:check_requirements&quot;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>details.
+</span></code></pre></div></td></tr></table></div>
+<p>Installer les paquets manquants (adapter la liste au résultat précédent) :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>php8.2-bcmath
+</span></code></pre></div></td></tr></table></div>
+Vérifier la mise à jour avec la commande :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php8.2<span class="w"> </span>bin/console<span class="w"> </span>system:check_requirements
+</span></code></pre></div></td></tr></table></div>
+Source : https://help.glpi-project.org/faq/glpi/installation_update</p>
+<p>S'assurer des bonnes permissions pour permettre la lecture du fichier downstream et par conséquent de la base de données :
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a>sudo<span class="w"> </span>chown<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/glpi/inc/downstream.php
+</span></code></pre></div></td></tr></table></div></p>
 <h3 id="pour-aller-plus-loin">Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Permanent link">&para;</a></h3>
-<p>Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinnente. Le docker-compose.yaml ressemblerait à :</p>
+<p>Petite note bonus, selon l'environnement, je sais qu'il existe une version Docker de GLPI qui pourrait s'avérer ou non pertinente. Le docker-compose.yaml ressemblerait à :</p>
 <p><img alt="Image" src="assets/20260118182627.png" />
 Source :
 https://help.glpi-project.org/tutorials/fr/procedures/running_glpi_on_docker
