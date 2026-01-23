@@ -9,7 +9,7 @@ Documentation technique de mes travaux réalisés dans le cadre d'un test de pos
 ### Brief 1 et 2 : Cisco Packet Tracer
 
 
-[Télécharger les fichiers Packet Tracer](https://github.com/Natalshadow/SOHO/tree/main/Deliverables)
+[Télécharger les fichiers Packet Tracer](https://github.com/Natalshadow/SOHO/tree/main/deliverables)
 
 ### Brief 3 : Infrastructure Windows Server
 Déploiement d'un environnement Active Directory complet incluant :
